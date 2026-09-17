@@ -1,15 +1,396 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
+
+    <!-- Responsive design -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+
+    <title>Employee Management System</title>
+
+    <!-- CSS file -->
+    <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-    <h1></h1>
-    <script>  
-    </script>
-    <script src="./task7.js"></script>
-    
+
+    <!-- ================= HEADER ================= -->
+
+    <header class="header">
+
+        <div>
+            <h1>Employee Management System</h1>
+            <p>Manage your employees easily</p>
+        </div>
+
+        <!-- Date and Time -->
+        <div class="datetime">
+            <p id="currentDate">Today: --</p>
+            <p id="currentTime">Time: --</p>
+        </div>
+
+    </header>
+
+
+    <!-- ================= MAIN CONTAINER ================= -->
+
+    <main class="container">
+
+
+        <!-- ================= STATUS MESSAGE ================= -->
+
+        <div id="statusMessage" class="status">
+            Loading employees...
+        </div>
+
+
+        <!-- ================= SEARCH SECTION ================= -->
+
+        <section class="search-section">
+
+            <div class="search-box">
+
+                <label for="searchInput">
+                    Search Employee
+                </label>
+
+                <input
+                    type="text"
+                    id="searchInput"
+                    placeholder="Search by name..."
+                >
+
+                <button id="searchButton">
+                    Search
+                </button>
+
+            </div>
+
+
+            <!-- ================= DEPARTMENT FILTER ================= -->
+
+            <div class="filter-section">
+
+                <h3>Filter by Department</h3>
+
+                <div class="filter-buttons">
+
+                    <button class="department-btn active"
+                        data-department="All">
+                        All
+                    </button>
+
+                    <button class="department-btn"
+                        data-department="IT">
+                        IT
+                    </button>
+
+                    <button class="department-btn"
+                        data-department="HR">
+                        HR
+                    </button>
+
+                    <button class="department-btn"
+                        data-department="Finance">
+                        Finance
+                    </button>
+
+                    <button class="department-btn"
+                        data-department="Marketing">
+                        Marketing
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= DASHBOARD STATS ================= -->
+
+        <section class="dashboard">
+
+            <div class="stat-card">
+
+                <h3>Total Employees</h3>
+
+                <p id="employeeCount">
+                    0
+                </p>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <h3>Total Salary</h3>
+
+                <p id="totalSalary">
+                    ₹0
+                </p>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <h3>Average Salary</h3>
+
+                <p id="averageSalary">
+                    ₹0
+                </p>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <h3>Highest Paid</h3>
+
+                <p id="highestSalary">
+                    ₹0
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= HIGHEST SALARY ================= -->
+
+        <section class="highest-paid">
+
+            <h2>🏆 Highest Paid Employee</h2>
+
+            <div id="highestEmployee">
+                No employee data
+            </div>
+
+        </section>
+
+
+        <!-- ================= SORT ================= -->
+
+        <section class="sort-section">
+
+            <label for="sortSelect">
+                Sort Employees:
+            </label>
+
+            <select id="sortSelect">
+
+                <option value="none">
+                    Select Sorting
+                </option>
+
+                <option value="nameAsc">
+                    Name ↑
+                </option>
+
+                <option value="nameDesc">
+                    Name ↓
+                </option>
+
+                <option value="ageAsc">
+                    Age ↑
+                </option>
+
+                <option value="ageDesc">
+                    Age ↓
+                </option>
+
+                <option value="salaryAsc">
+                    Salary ↑
+                </option>
+
+                <option value="salaryDesc">
+                    Salary ↓
+                </option>
+
+            </select>
+
+        </section>
+
+
+        <!-- ================= EMPLOYEE CARDS ================= -->
+
+        <section>
+
+            <h2 class="section-title">
+                Employees
+            </h2>
+
+            <!-- Cards will be created here using JavaScript -->
+
+            <div
+                id="employeeContainer"
+                class="employee-grid">
+            </div>
+
+        </section>
+
+
+        <!-- ================= ADD EMPLOYEE ================= -->
+
+        <section class="add-section">
+
+            <h2>
+                Add Employee
+            </h2>
+
+            <form id="employeeForm">
+
+                <!-- Name -->
+
+                <div class="form-group">
+
+                    <label for="name">
+                        Name
+                    </label>
+
+                    <input
+                        type="text"
+                        id="name"
+                        placeholder="Enter employee name"
+                    >
+
+                    <small
+                        id="nameError"
+                        class="error">
+                    </small>
+
+                </div>
+
+
+                <!-- Age -->
+
+                <div class="form-group">
+
+                    <label for="age">
+                        Age
+                    </label>
+
+                    <input
+                        type="number"
+                        id="age"
+                        placeholder="Enter age"
+                    >
+
+                    <small
+                        id="ageError"
+                        class="error">
+                    </small>
+
+                </div>
+
+
+                <!-- Email -->
+
+                <div class="form-group">
+
+                    <label for="email">
+                        Email
+                    </label>
+
+                    <input
+                        type="email"
+                        id="email"
+                        placeholder="Enter email"
+                    >
+
+                    <small
+                        id="emailError"
+                        class="error">
+                    </small>
+
+                </div>
+
+
+                <!-- Department -->
+
+                <div class="form-group">
+
+                    <label for="department">
+                        Department
+                    </label>
+
+                    <select id="department">
+
+                        <option value="">
+                            Select Department
+                        </option>
+
+                        <option value="IT">
+                            IT
+                        </option>
+
+                        <option value="HR">
+                            HR
+                        </option>
+
+                        <option value="Finance">
+                            Finance
+                        </option>
+
+                        <option value="Marketing">
+                            Marketing
+                        </option>
+
+                    </select>
+
+                    <small
+                        id="departmentError"
+                        class="error">
+                    </small>
+
+                </div>
+
+
+                <!-- Salary -->
+
+                <div class="form-group">
+
+                    <label for="salary">
+                        Salary
+                    </label>
+
+                    <input
+                        type="number"
+                        id="salary"
+                        placeholder="Enter salary"
+                    >
+
+                    <small
+                        id="salaryError"
+                        class="error">
+                    </small>
+
+                </div>
+
+
+                <!-- Submit -->
+
+                <button
+                    type="submit"
+                    class="add-button">
+
+                    Add Employee
+
+                </button>
+
+            </form>
+
+        </section>
+
+    </main>
+
+
+    <!-- JavaScript -->
+
+    <script src="project.js"></script>
+
 </body>
+
 </html>
